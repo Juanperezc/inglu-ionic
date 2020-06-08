@@ -1,29 +1,52 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
-<ion-content>
+<!--  <ion-header>
   <ion-grid>
     <ion-row justify-content-center>
       <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
         <div text-center>
           <h4>Login</h4>
         </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+ <!--  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar> -->
+<!-- </ion-header> 
+ -->
+<ion-content padding class="vertical-center">
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+        <div text-center>
+         <img src="/assets/logo.png"/>
+        </div>
+        <br/>
+        <div text-center>
+          <h4>Club de diabeticos las mercedes</h4>
+        </div>
+        <br/>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
         <div padding>
+        
           <ion-item>
-            <ion-input type="text" placeholder="Username"></ion-input>
+            <ion-input type="text" formControlName="email" placeholder="Correo"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input type="password" placeholder="Password"></ion-input>
+            <ion-input type="password" formControlName="password" placeholder="Contraseña"></ion-input>
           </ion-item>
+      
         </div>
+        <br/>
+       
         <div padding>
-          <a> Olvido su contraseña?</a>
+          <ion-button size="medium" type="submit" [disabled]="!loginForm.valid" expand="block">Ingresar</ion-button>
         </div>
-        <div padding>
-          <ion-button size="medium" (click)="onLogin()" expand="block">Login</ion-button>
+      </form>
+        <br/>
+        <div class="ion-text-center" padding>
+         <a> Olvido su  contraseña?</a> 
+         
+      
         </div>
       </ion-col>
     </ion-row>

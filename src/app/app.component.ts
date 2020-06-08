@@ -19,7 +19,7 @@ export class AppComponent {
   
   ) {
  
-    this.navController.navigateRoot('login')
+    /* this.navController.navigateRoot('login') */
     this.initializeApp();
   }
 

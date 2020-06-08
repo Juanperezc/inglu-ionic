@@ -1,0 +1,77 @@
+<ion-header  no-border>
+  <app-nav-header title="Perfil">  <ion-button (click)="goToSettings()">
+    <ion-icon name="ellipsis-horizontal-sharp"></ion-icon>
+   </ion-button></app-nav-header>
+ 
+</ion-header>
+
+<ion-content fullscreen="true" slot="fixed" >
+  <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+  <div class="content-tab">
+    <div class="card">
+      <div class="header">
+        <div class="avatar">
+          <ion-button>  <ion-icon name="camera-sharp"></ion-icon></ion-button>
+          <img [src]="(user && user.profile_pic) ? user.profile_pic : '/assets/avatar.jpeg'" alt="">
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="user-meta ion-text-center">
+          <h3 class="playername">{{user && (user.name + " " + user.last_name)}}</h3>
+   <!--        <h5 class="country">Switzerland</h5> -->
+         <!--  <h6 class="ranking">Current ranking: <ion-chip> -->
+         <!--      <ion-label>2</ion-label> -->
+          <!--   </ion-chip> -->
+       <!--    </h6 -->
+        </div>
+
+        <form *ngIf="profileForm" [formGroup]="profileForm" (ngSubmit)="onSave()">
+          <div padding>
+            <ion-item>
+              <ion-label>Nombre</ion-label>
+              <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+            
+              <ion-item>
+                <ion-label>Apellido</ion-label>
+                <ion-input type="text" formControlName="last_name"></ion-input>
+              </ion-item>
+             
+              <ion-item>
+                <ion-label>Cedula</ion-label>
+                <ion-input type="text"  [disabled]="true"formControlName="id_card"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Email</ion-label>
+                <ion-input type="text"  [disabled]="true"formControlName="email"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Genero</ion-label>
+                <ion-input type="text" [disabled]="true" formControlName="gender"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Fecha de nacimiento</ion-label>
+                <ion-input type="text" [disabled]="true" formControlName="date_of_birth"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Direccion</ion-label>
+                <ion-textarea type="text" formControlName="address"></ion-textarea>
+              </ion-item>
+              <ion-item>
+                <ion-label>Telefono</ion-label>
+                <ion-input type="text" formControlName="phone"></ion-input>
+              </ion-item>
+          </div>
+          <br/>
+
+
+
+       <!--  <ion-button expand="full" color="primary">http://rogerfederer.com</ion-button>
+        <ion-button expand="full" color="secondary">@RogerFederer on Twitter</ion-button> -->
+        <ion-button expand="full" type="submit" [disabled]="!profileForm.valid" color="secondary">Guardar cambios</ion-button>
+</form>
+      </div>
+    </div>
+  </div>
+   
+</ion-content>

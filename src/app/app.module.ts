@@ -13,10 +13,13 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './services/utils/auth-interceptor.service';
 import { GlobalService } from './services/global.service';
 import { AuthGuardService } from './services/utils/auth-guard.service';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
+
     BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(),
@@ -27,6 +30,7 @@ import { AuthGuardService } from './services/utils/auth-guard.service';
   providers: [
     StatusBar,
     SplashScreen,
+    OneSignal,
     GlobalService,
     AuthGuardService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

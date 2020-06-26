@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { ClubPostService } from 'src/app/services/ClubPostService.service';
 
 @NgModule({
   imports: [
@@ -16,6 +17,9 @@ import { ComponentsModule } from 'src/app/components/components.module';
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: HomePage }])
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+  providers: [
+    ClubPostService
+  ]
 })
 export class HomePageModule {}

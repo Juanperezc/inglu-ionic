@@ -1,0 +1,12 @@
+ion-button {
+	ion-badge {
+		position: absolute;
+        opacity: 0.9;
+        font-size: 0.7em;
+        top: 0.1rem;
+        right: 0.4rem;
+		& ~ ion-icon {
+			margin-right: 1.2rem;
+		}
+    }
+}

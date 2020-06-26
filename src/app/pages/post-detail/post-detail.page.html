@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Publicación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="p">
+    <img class="" [src]="p.photo" />
+    <ion-card-header>
+      <ion-card-subtitle><b>Categoria</b>: {{p.category}}</ion-card-subtitle>
+      <ion-card-title>{{p.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ p.description }}</p>
+      <br>
+      <p><b>Author: </b> {{p.author}}</p>
+      <p><b>Ultima actualización: </b> {{getMomentFrom(p.updated_at)}}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

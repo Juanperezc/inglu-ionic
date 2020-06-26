@@ -1,17 +1,23 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
+  <app-nav-header title="Citas"><!-- <b>s</b> --></app-nav-header>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-list >
+    <ion-item (click)="goToAppointment(appointment.id)"*ngFor="let appointment of appointments">
+      <ion-thumbnail  slot="start">
+        <img [src]="appointment.photo">
+      </ion-thumbnail>
+      <ion-label> 
+         <h3><b>Medico:</b> {{ appointment.doctor }}</h3>
+        <p><b>Fecha:</b>{{appointment.date}}</p>
+        <p><b>Estado:</b>{{getStatusItem(appointment.status)}}</p>
+     </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

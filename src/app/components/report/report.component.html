@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismissModal()" icon-only
+        ><ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Reportar problema</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <!-- <ion-list-header><b>Reportar problema</b></ion-list-header> -->
+  <form [formGroup]="claimForm" (ngSubmit)="onReport()">
+    <div padding>
+      <ion-item>
+        <ion-label>Tipo de reporte</ion-label>
+        <ion-select formControlName="claim_id"  placeholder="">
+          <ion-select-option  *ngFor="let r of claimTypes" [value]="r.id">{{r.type}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Comentario</ion-label>
+        <ion-textarea  formControlName="text" placeholder="Comentario"></ion-textarea>
+      </ion-item>
+    </div>
+    <br/>
+    <div padding>
+      <ion-button size="medium" type="submit" [disabled]="!claimForm.valid" expand="block">Enviar</ion-button>
+    </div>
+  </form>
+</ion-content>

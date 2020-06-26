@@ -3,11 +3,15 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 12</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card (click)="goToPublication(p.id)" *ngFor="let p of posts">
+    <img class="" [src]="p.photo" />
+    <ion-card-header>
+      <ion-card-subtitle>{{p.category}}</ion-card-subtitle>
+      <ion-card-title>{{p.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ p.description.length > 40 ? ( p.description | slice: 0:40) + "..." :
+      p.description }}
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismissModal()" icon-only
+        ><ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Hacer Sugerencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <!-- <ion-list-header><b>Reportar problema</b></ion-list-header> -->
+  <form [formGroup]="suggestionForm" (ngSubmit)="onReport()">
+    <div padding>
+      <ion-item>
+        <ion-label>Tipo de sugerencia</ion-label>
+        <ion-select formControlName="suggestion_id"  placeholder="">
+          <ion-select-option  *ngFor="let r of suggestionTypes" [value]="r.id">{{r.type}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Comentario</ion-label>
+        <ion-textarea  formControlName="text" placeholder="Comentario"></ion-textarea>
+      </ion-item>
+    </div>
+    <br/>
+    <div padding>
+      <ion-button size="medium" type="submit" [disabled]="!suggestionForm.valid" expand="block">Enviar</ion-button>
+    </div>
+  </form>
+</ion-content>

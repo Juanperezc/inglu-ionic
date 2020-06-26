@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cita</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section>
+  <ion-card  *ngIf="appointment">
+    <ion-card-content>
+      <img [src]="appointment.photo">
+      <h3><b>Medico:</b> {{ appointment.doctor }}</h3>
+      <p><b>Fecha:</b>{{appointment.date}}</p>
+    </ion-card-content>
+  </ion-card>
+</section>
+  <section>
+    <header>Opciones</header>
+    <ion-button color="warning">Reprogramar</ion-button>
+    <ion-button color="danger">Cancelar</ion-button>
+   
+  </section>
+</ion-content>

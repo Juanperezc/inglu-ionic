@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Notificaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list >
+    
+    <ion-item (click)="goToSection(n.type)" [class]="n.read_at == null ? 'new' : null" *ngFor="let n of notifications">
+      <ion-thumbnail  slot="start">
+        <img [src]="getImage(n.type)">
+      </ion-thumbnail>
+      <ion-label> 
+         <h3>{{getTitle(n.type)   }}</h3>
+        <p>{{getMomentFrom(n.created_at)}}</p>
+     </ion-label>
+    </ion-item>
+  
+  </ion-list>
+</ion-content>

@@ -12,9 +12,9 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['profile.page.scss']
 })
 export class ProfilePage implements OnInit{
-  private loading: boolean;
-  private user : any;
-  private profileForm : FormGroup;
+  public loading: boolean;
+  public user : any;
+  public profileForm : FormGroup;
 
   constructor(private userService: UserService,
     private formBuilder: FormBuilder,

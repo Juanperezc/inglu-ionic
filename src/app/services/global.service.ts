@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LoadingController, ToastController } from '@ionic/angular';
+import * as moment from 'moment';
 /* import Swal from 'sweetalert2';
  */
 @Injectable({
@@ -52,6 +53,14 @@ export class GlobalService {
    if (this.ionicLoading){
     await this.ionicLoading.dismiss();
    }
+  }
+
+  momentDate(date: any, format="YYYY-MM-DD HH:mm"){
+    return moment.utc(date, format).lang("es").local().format("DD-MM-YYYY HH:mm");
+   }
+ 
+   momentTimeAgo(date: any, format="YYYY-MM-DD HH:mm"){
+   return moment.utc(date, format).lang("es").local().fromNow();
   }
 
 }

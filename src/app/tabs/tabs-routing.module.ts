@@ -56,8 +56,24 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'notifications',
+    loadChildren: () => import('../pages/notifications/notifications.module').then( m => m.NotificationsPageModule)
+  },
+  {
     path: 'settings',
     loadChildren: () => import('../pages/settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'post-detail/:id',
+    loadChildren: () => import('../pages/post-detail/post-detail.module').then( m => m.PostDetailPageModule)
+  },
+  {
+    path: 'appointment-detail/:id',
+    loadChildren: () => import('../pages/appointment-detail/appointment-detail.module').then( m => m.AppointmentDetailPageModule)
+  },
+  {
+    path: 'event-detail/:id',
+    loadChildren: () => import('../pages/event-detail/event-detail.module').then( m => m.EventDetailPageModule)
   },
   {
     path: '',

@@ -12,7 +12,7 @@ import { GlobalService } from 'src/app/services/global.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  private loginForm : FormGroup;
+  public loginForm : FormGroup;
 
   constructor(private navController: NavController,
     private formBuilder: FormBuilder,

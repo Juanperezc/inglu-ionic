@@ -19,7 +19,7 @@ export class NavHeaderComponent implements OnInit,AfterViewInit {
   async ngAfterViewInit(){
     this.user = await UserStorage.getUser();
     console.log(this.user);
-    this.notifications = this.user.notifications;
+    this.notifications = this.user ? this.user.notifications : [];
   }
   unreadNotification(){
     let unread = 0;

@@ -5,8 +5,8 @@
 
 export const environment = {
   production: false,
-
   googleMapApiKey: 'AIzaSyBSvo0x8v3C6aFWcSi2zooOC9tqGCOqCj4',
+  intra_url:  "http://127.0.0.1:4300",
   endpoint: "http://127.0.0.1:8000/api"
 };
 

@@ -64,7 +64,7 @@ export class RemindersPage implements OnInit {
           message: '¿Esta seguro que desea cancelar su cita? No se podran revertir los cambios.',
           buttons: [
             {
-              text: 'Cancelar',
+              text: 'Volver',
               role: 'cancel',
               cssClass: 'secondary',
               handler: async (blah) => {

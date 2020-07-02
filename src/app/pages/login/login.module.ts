@@ -8,6 +8,7 @@ import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
 import { UserService } from 'src/app/services/UserService.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { UserService } from 'src/app/services/UserService.service';
     LoginPageRoutingModule
   ],
   providers: [
-    UserService
+    UserService,
+    InAppBrowser
   ],
   declarations: [LoginPage]
 })

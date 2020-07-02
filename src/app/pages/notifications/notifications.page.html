@@ -8,8 +8,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-list >
-    
+  <app-no-data text="No tienes notificaciones" *ngIf="notifications && notifications.length == 0" ></app-no-data>
+
+  <ion-list *ngIf="notifications && notifications.length > 0" >
     <ion-item (click)="goToSection(n.type)" [class]="n.read_at == null ? 'new' : null" *ngFor="let n of notifications">
       <ion-thumbnail  slot="start">
         <img [src]="getImage(n.type)">

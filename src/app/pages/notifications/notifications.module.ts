@@ -8,9 +8,11 @@ import { NotificationsPageRoutingModule } from './notifications-routing.module';
 
 import { NotificationsPage } from './notifications.page';
 import { NotificationService } from 'src/app/services/NotificationService.service';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
+    ComponentsModule,
     CommonModule,
     FormsModule,
     IonicModule,

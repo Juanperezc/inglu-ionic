@@ -84,7 +84,7 @@ export class AppointmentDetailPage implements OnInit {
       ],
       buttons: [
         {
-          text: "Cancelar",
+          text: "Atras",
           role: "cancel",
           cssClass: "secondary",
           handler: () => {
@@ -140,7 +140,7 @@ export class AppointmentDetailPage implements OnInit {
         message: '¿Esta seguro que desea cancelar su cita? No se podran revertir los cambios.',
         buttons: [
           {
-            text: 'Cancelar',
+            text: 'Volver',
             role: 'cancel',
             cssClass: 'secondary',
             handler: async (blah) => {

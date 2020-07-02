@@ -5,7 +5,8 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserStorage } from 'src/app/services/storage/UserStorage.service';
 import { UserService } from 'src/app/services/UserService.service';
 import { GlobalService } from 'src/app/services/global.service';
-
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -14,11 +15,13 @@ import { GlobalService } from 'src/app/services/global.service';
 export class LoginPage implements OnInit {
   public loginForm : FormGroup;
 
-  constructor(private navController: NavController,
+  constructor(
+    private navController: NavController,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
     private globalService: GlobalService,
-    private userService: UserService) { 
+    private userService: UserService,
+    private iab: InAppBrowser) { 
       this.loginForm = this.formBuilder.group({
         email: ['', Validators.required],
         password: ['',Validators.required],
@@ -60,5 +63,12 @@ export class LoginPage implements OnInit {
      /*  console.log(this.formService.getAllErrors(this.loginForm)); */
     }
   }
+
+  forgotPassword(){
+    const browser = this.iab.create(environment.intra_url + "/public/forget-password");
+    browser.show();
+// browser.show(), browser.close()
+  }
+  
 
 }

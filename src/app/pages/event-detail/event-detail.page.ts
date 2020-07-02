@@ -96,7 +96,7 @@ export class EventDetailPage implements OnInit {
       ],
       buttons: [
         {
-          text: "Cancelar",
+          text: "Volver",
           role: "cancel",
           cssClass: "secondary",
           handler: () => {

@@ -72,13 +72,32 @@ export class ProfilePage implements OnInit {
     await this.initForm();
   }
 
+  genderToSpanish(gender){
+    switch(gender){
+      case "male": {
+        return "Masculino"
+      }
+      case "female": 
+      return "Femenino"
+    }
+  }
+
+  genderToEnglish(gender){
+    switch(gender){
+      case "Masculino": {
+        return "male"
+      }
+      case "Femenino": 
+      return "female"
+    }
+  }
   async initForm() {
     this.profileForm = this.formBuilder.group({
       name: [this.user ? this.user.name : "", Validators.required],
       profile_pic: [this.user ? this.user.profile_pic : null],
       last_name: [this.user ? this.user.last_name : "", Validators.required],
       id_card: [this.user ? this.user.id_card : "", Validators.required],
-      gender: [this.user ? this.user.gender : "", Validators.required],
+      gender: [this.user ? this.genderToSpanish(this.user.gender) : "", Validators.required],
       email: [this.user ? this.user.email : "", Validators.required],
       date_of_birth: [
         this.user ? this.user.date_of_birth : "",
@@ -103,7 +122,8 @@ export class ProfilePage implements OnInit {
   async onSave() {
     if (this.profileForm.valid) {
       try {
-        const data = this.profileForm.value;
+        let data = this.profileForm.value;
+        data.gender = this.genderToEnglish(data.gender);
         await this.globalService.presentLoading();
         const userResponse: any = await this.userService.update(
           this.user.id,

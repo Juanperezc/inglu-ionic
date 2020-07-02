@@ -21,9 +21,7 @@ export class AppComponent {
     private statusBar: StatusBar,
     private navController : NavController,
     private oneSignal: OneSignal
-  
   ) {
- 
     /* this.navController.navigateRoot('login') */
     this.initializeApp();
   }
@@ -35,14 +33,11 @@ export class AppComponent {
 
       if (this.platform.is('cordova')) {
         this.oneSignal.startInit('cb5aeb81-0aa0-4952-9578-fa33dd0e0ebd', '517066045765');
-
         const user = await UserStorage.getUser();
-  
         if (user){
           console.log('user',user);
           this.oneSignal.setEmail(user.email);
         }
-  
         this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
   
         this.oneSignal.handleNotificationReceived().subscribe(() => {

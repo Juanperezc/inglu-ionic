@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfilePage } from './profile.page';
 import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { LogoutComponent } from 'src/app/components/logout/logout.component';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 @NgModule({
   imports: [
@@ -17,6 +19,12 @@ import { ComponentsModule } from 'src/app/components/components.module';
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: ProfilePage }])
   ],
-  declarations: [ProfilePage]
+  entryComponents: [
+    LogoutComponent
+  ],
+  declarations: [ProfilePage],
+  providers: [
+    ImagePicker
+  ]
 })
 export class ProfilePageModule {}

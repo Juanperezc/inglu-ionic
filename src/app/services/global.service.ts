@@ -8,7 +8,7 @@ import * as moment from 'moment';
   providedIn: 'root'
 })
 export class GlobalService {
-
+  public updateAppointment: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public loading: BehaviorSubject<Boolean> = new BehaviorSubject(false);
   private ionicLoading: any;
   constructor(public loadingController: LoadingController,
@@ -26,6 +26,11 @@ export class GlobalService {
     })
     return result;
   } */
+  incUpdateAppointment(boolean){
+    this.updateAppointment.next(boolean);
+  }
+
+
   setLoading(boolean: Boolean){
     this.loading.next(boolean);
   }
@@ -34,6 +39,15 @@ export class GlobalService {
     const toast = await this.toastController.create({
       message: text,
       color: "success",
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  async errorToast(text: string = "") {
+    const toast = await this.toastController.create({
+      message: text,
+      color: "danger",
       duration: 2000
     });
     toast.present();
@@ -54,6 +68,32 @@ export class GlobalService {
     await this.ionicLoading.dismiss();
    }
   }
+
+  getDayStr(date:any){
+    switch(date){
+      case "Sunday": {
+        return "Domingo"
+      }
+      case "Monday": {
+        return "Lunes"
+      }
+      case "Tuesday": {
+        return "Martes"
+      }
+      case "Wednesday": {
+        return "Miercoles"
+      }
+      case "Thursday": {
+        return "Jueves"
+      }
+      case "Friday": {
+        return "Viernes"
+      }
+      case "Saturday": {
+        return "Sabado"
+      }
+    }
+   }
 
   momentDate(date: any, format="YYYY-MM-DD HH:mm"){
     return moment.utc(date, format).lang("es").local().format("DD-MM-YYYY HH:mm");

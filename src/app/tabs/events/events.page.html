@@ -1,46 +1,64 @@
 <ion-header [translucent]="true">
   <app-nav-header title="Eventos">
     <ion-button (click)="presentFilter()">
-      <ion-icon [color]="type ? 'primary' : 'null'" name="filter-outline"></ion-icon>
-     </ion-button>
+      <ion-icon
+        [color]="type ? 'primary' : 'null'"
+        name="filter-outline"
+      ></ion-icon>
+    </ion-button>
   </app-nav-header>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Default Segment -->
-  <ion-segment [(ngModel)]="segmentModel" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="events">
-      <ion-label>Eventos</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="my_events">
-      <ion-label>Mis eventos</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+  <app-auth-verify *ngIf="!user"></app-auth-verify>
+  <div *ngIf="user">
+    <!-- Default Segment -->
+    <ion-segment
+      [(ngModel)]="segmentModel"
+      (ionChange)="segmentChanged($event)"
+    >
+      <ion-segment-button value="events">
+        <ion-label>Eventos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="my_events">
+        <ion-label>Mis eventos</ion-label>
+      </ion-segment-button>
+    </ion-segment>
 
-  <div *ngIf="segmentModel === 'events'">
-    <ion-card (click)="goToEvent(event.id)" *ngFor="let event of events">
-      <img class="" [src]="event.picture" />
-      <ion-card-header>
-        <ion-card-title>{{event.name}}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        {{ event.description.length > 40 ? ( event.description | slice: 0:40) +
-        "..." : event.description }}
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div *ngIf="segmentModel === 'my_events'">
-    <ion-list>
-      <ion-item (click)="goToEvent(event.id)" *ngFor="let event of my_events">
-        <ion-thumbnail slot="start">
-          <img [src]="event.picture" />
-        </ion-thumbnail>
-        <ion-label>
-          <!--   <h3><b>Medico:</b> {{ appointment.doctor }}</h3>
-          <p><b>Fecha:</b>{{appointment.date}}</p>
-          <p><b>Estado:</b>{{getStatusItem(appointment.status)}}</p> -->
-        </ion-label>
-      </ion-item>
-    </ion-list>
+    <div *ngIf="segmentModel === 'events'">
+      <div *ngIf="events">
+        <ion-card (click)="goToEvent(event.id)" *ngFor="let event of events">
+          <img class="" [src]="event.picture" />
+          <ion-card-header>
+            <ion-card-title>{{event.name}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{ event.description.length > 40 ? ( event.description | slice:
+            0:40) + "..." : event.description }}
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    <div *ngIf="segmentModel === 'my_events'">
+      <ion-list *ngIf="my_events && my_events.length > 0">
+        <ion-item (click)="goToEvent(event.id)" *ngFor="let event of my_events">
+          <ion-thumbnail slot="start">
+            <img [src]="event.picture" />
+          </ion-thumbnail>
+          <ion-label>
+            <p><b>Nombre:</b> {{ event.name }}</p>
+            <p><b>Lugar:</b> {{ event.location }}</p>
+            <p><b>Fecha:</b> {{ getMomentDate(event.date) }}</p>
+
+            <!-- <p><b>Fecha:</b>{{appointment.date}}</p>
+          <p><b>Estado:</b>{{getStatusItem(appointment.status)}}</p> -- -->
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <app-no-data
+        *ngIf="my_events && my_events.length == 0"
+        text=""
+      ></app-no-data>
+    </div>
   </div>
 </ion-content>

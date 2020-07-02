@@ -1,9 +1,10 @@
 ion-content {
-  --background: url(../../../assets/background.jpg) no-repeat top fixed,
-    #fff;
   position: relative;
   height: 100%;
   width: 100%;
+}
+.content-profile {
+  --background: url(../../../assets/background.jpg) no-repeat top fixed, #fff;
 
   ion-button {
     margin-top: 1em;
@@ -22,18 +23,16 @@ ion-chip {
 
 .card {
   margin: 0 auto;
-
   .header {
-    height: 180px; // 20vh;
-
+    height: 120px; // 20vh;
     .avatar {
       width: 160px; //40vw
-      height: 160px;
+      height: 100px;
       position: relative;
       margin: 0 auto;
       ion-button {
         position: absolute;
-        bottom: -56%;
+        bottom: -90%;
         right: 0;
         z-index: 9;
       }
@@ -44,6 +43,7 @@ ion-chip {
         bottom: calc(-1 * (80px + 4px)); // -42px;
         border: 8px solid #9dc912;
         background-color: #fff;
+        width: 100%;
       }
     }
   }

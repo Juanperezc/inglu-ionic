@@ -9,8 +9,13 @@ import { ClaimService } from "../services/ClaimService.service";
 import { ClaimUserService } from "../services/ClaimUserService.service";
 import { SuggestionService } from "../services/SuggestionService.service";
 import { SuggestionUserService } from "../services/SuggestionUserService.service";
-import { SuggestionComponent } from './suggestion/suggestion.component';
-
+import { SuggestionComponent } from './suggestion/suggestion.component'
+import { ReScheduleComponent } from './re-schedule/re-schedule.component';
+import { NoDataComponent } from './no-data/no-data.component';
+import { SelectSpecialtyComponent } from './select-specialty/select-specialty.component';
+import { SpecialtyService } from '../services/SpecialtyService.service';
+import { LogoutComponent } from './logout/logout.component'
+import { AuthVerifyComponent } from './auth-verify/auth-verify.component';
 @NgModule({
   imports: [
     IonicModule,
@@ -19,14 +24,15 @@ import { SuggestionComponent } from './suggestion/suggestion.component';
     CommonModule,
     FormsModule,
   ],
-  entryComponents: [],
+  entryComponents: [NoDataComponent,AuthVerifyComponent],
   providers: [
     ClaimService,
     ClaimUserService,
     SuggestionService,
     SuggestionUserService,
+    SpecialtyService
   ],
-  declarations: [ReportComponent, NavHeaderComponent,SuggestionComponent, FilterEventsComponent],
-  exports: [ReportComponent, NavHeaderComponent, FilterEventsComponent],
+  declarations: [ReScheduleComponent,LogoutComponent, ReportComponent,SelectSpecialtyComponent,AuthVerifyComponent, NoDataComponent, NavHeaderComponent,SuggestionComponent, FilterEventsComponent],
+  exports: [ReScheduleComponent,LogoutComponent, ReportComponent,SelectSpecialtyComponent,AuthVerifyComponent, NoDataComponent, NavHeaderComponent, FilterEventsComponent],
 })
 export class ComponentsModule {}

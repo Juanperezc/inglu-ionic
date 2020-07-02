@@ -40,16 +40,19 @@
       </ion-item>
       <ion-item>
         <ion-label>Estado</ion-label>
-        <ion-label>{{e.status}}</ion-label>
+        <ion-label>{{getStatus(e.status)}}</ion-label>
       </ion-item>
       <ion-item>
         <ion-label  position="stacked">Descripcion</ion-label>
         <ion-textarea [value]="e.description" disabled="true"></ion-textarea>
       </ion-item>
-      <ion-item *ngIf="!e.is_event_user">
+      <ion-item *ngIf="e.status != 3 && e.status != 2" >
         <ion-label >Opciones</ion-label>
-        <ion-button (click)="joinEvent()" color="warning" slot="end">
+        <ion-button *ngIf="!e.is_event_user" (click)="joinEvent()" color="success" slot="end">
           Inscribirse
+        </ion-button>
+        <ion-button *ngIf="e.is_event_user" (click)="unSubscribe()" color="warning" slot="end">
+          Cancelar asistencia
         </ion-button>
       </ion-item>
       <div class="star-rating">
@@ -57,9 +60,16 @@
           <ion-label position="stacked">Comentario sobre el evento</ion-label>
           <ion-textarea mode="md"></ion-textarea>
         </ion-item> -->
-        <ion-item>
+        <ion-item  *ngIf="e && e.is_event_user && e.status == 3">
         <ion-label>Calificación</ion-label>
-        <star-rating *ngIf="e && e.is_event_user" value=0  totalstars="5" checkedcolor="yellow" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+        <star-rating *ngIf="e && e.is_event_user" 
+        [value]="e.qualification" 
+        totalstars="5"
+        checkedcolor="yellow"
+        uncheckedcolor="black" 
+        size="24px" 
+        [readonly]="e.qualification == 0 ? false : true" 
+        (rate)="onRate($event)"></star-rating>
         <ion-icon *ngIf="e && e.is_event_user && e.qualification != 0" color="success" name="checkmark-circle-outline"></ion-icon>
       </ion-item>
       </div>

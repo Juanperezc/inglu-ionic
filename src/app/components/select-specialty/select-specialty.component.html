@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismissModal()" icon-only
+        ><ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Selecciona una especialidad</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-card  *ngFor="let s of specialties" (click)="dismissModal(s.id)">
+    <img class="" [src]="s.picture" />
+    <ion-card-header>
+      <ion-card-title>{{s.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

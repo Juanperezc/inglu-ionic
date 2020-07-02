@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { UserService } from 'src/app/services/UserService.service';
 import { UserStorage } from 'src/app/services/storage/UserStorage.service';
@@ -8,16 +8,18 @@ import { UserStorage } from 'src/app/services/storage/UserStorage.service';
   templateUrl: './nav-header.component.html',
   styleUrls: ['./nav-header.component.scss'],
 })
-export class NavHeaderComponent implements OnInit {
+export class NavHeaderComponent implements OnInit,AfterViewInit {
   private notifications = [];
+  public user : any;
   @Input() title: string = null;
-  
   constructor(private navController: NavController) { }
 
   async ngOnInit() {
-    const user: any = await UserStorage.getUser();
-    console.log(user);
-    this.notifications = user.notifications;
+  }
+  async ngAfterViewInit(){
+    this.user = await UserStorage.getUser();
+    console.log(this.user);
+    this.notifications = this.user.notifications;
   }
   unreadNotification(){
     let unread = 0;

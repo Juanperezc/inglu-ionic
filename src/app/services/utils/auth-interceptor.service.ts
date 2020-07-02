@@ -41,7 +41,7 @@ export class AuthInterceptorService implements HttpInterceptor {
       catchError( (err: HttpErrorResponse) => {
         console.log('error err', err);
         if (err.status === 401) {
-          this.navController.navigateRoot('/login')
+       /*    this.navController.navigateRoot('/login') */
          /*  this.router.navigateByUrl('/public/sign-in'); */
         }
         if (err.status === 403) {

@@ -1,9 +1,9 @@
 <ion-toolbar>
   <ion-title>{{title}}</ion-title>
   <ion-buttons slot="end">
-    <ion-button (click)="goToNotifications()">
+    <ion-button *ngIf="user" (click)="goToNotifications()">
       <ion-badge *ngIf="unreadNotification() > 0"color="danger">{{unreadNotification()}}</ion-badge>  <ion-icon name="notifications-sharp"></ion-icon>
      </ion-button>
-     <ng-content></ng-content>
+     <ng-content *ngIf="user"></ng-content>
   </ion-buttons>
 </ion-toolbar>

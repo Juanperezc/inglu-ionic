@@ -21,6 +21,9 @@ export class NotificationService {
       case "App\\Notifications\\NewAppointment": {
         return "app/tabs/appointments";
       }
+       case "App\\Notifications\\NewReminder": {
+        return "app/tabs/reminders";
+      }
       default: {
         return null;
       }
@@ -32,6 +35,9 @@ export class NotificationService {
       case "App\\Notifications\\NewAppointment": {
         return "/assets/notifications/stethoscope-alt.svg";
       }
+      case "App\\Notifications\\NewReminder": {
+        return "/assets/notifications/notification.svg";
+      } 
       default: {
         return null;
       }
@@ -42,6 +48,9 @@ export class NotificationService {
     switch(type){
       case "App\\Notifications\\NewAppointment": {
         return "Tienes una nueva cita agendada";
+      }
+      case "App\\Notifications\\NewReminder": {
+        return "Tienes un recordatorio pendiente";
       }
       default: {
         return null;

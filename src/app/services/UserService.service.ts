@@ -24,6 +24,10 @@ export class UserService {
     return await this.http.get(environment.endpoint + `/user/index_doctors`).toPromise();
   }
 
+  async index_doctors_specialty(id) {
+    return await this.http.get(environment.endpoint + `/user/index_doctors_specialty?specialty_id=${id}`).toPromise();
+  }
+
   async login(data: any) {
       return await this.http.post(environment.endpoint + `/login`, data).toPromise();
   }

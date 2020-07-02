@@ -13,10 +13,10 @@ export class SettingsPage implements OnInit {
 
   ngOnInit() {
   }
+  
   async logout(){
-   await  UserStorage.clear();
+   await UserStorage.clear();
    this.navigationCtrl.navigateRoot('/login');
-
   }
 
 }

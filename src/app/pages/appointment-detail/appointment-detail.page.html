@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
@@ -23,4 +23,87 @@
     <ion-button color="danger">Cancelar</ion-button>
    
   </section>
+</ion-content>
+ -->
+
+ <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
+    </ion-buttons>
+ 
+    <ion-title>Cita</ion-title>
+    <ion-buttons  slot="end">
+      <ion-button (click)="suggestion()">
+        <ion-icon name="bulb-outline"></ion-icon>
+      </ion-button>
+      <ion-button  (click)="report()">
+        <ion-icon name="bonfire-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <!--  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+ <div *ngIf="a">
+  <ion-card >
+    <img class="" [src]="a.doctor_photo" />
+    <ion-card-header>
+      <ion-card-title>Cita medica con {{a.doctor}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+    
+      <ion-item>
+        <ion-label>Fecha</ion-label>
+        <ion-label>{{a.date}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Ubicacion</ion-label>
+        <ion-label>{{a.location}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Estado</ion-label>
+        <ion-label>{{getStatus(a.status)}}</ion-label>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label  position="stacked">Descripcion</ion-label>
+        <ion-textarea [value]="a.description" disabled="true"></ion-textarea>
+      </ion-item> -->
+      <ion-item *ngIf="a.status != 3 && a.status != 2" >
+        <!-- <ion-label >Opciones</ion-label> -->
+        <ion-button  (click)="cancelAppointment()" color="danger" slot="end">
+          Cancelar
+        </ion-button>
+        <ion-button  (click)="reScheduleAppointment()" color="warning" slot="end">
+          Reprogramar
+        </ion-button>
+      </ion-item>
+      <div class="star-rating">
+ <!--        <ion-item>
+          <ion-label position="stacked">Comentario sobre el evento</ion-label>
+          <ion-textarea mode="md"></ion-textarea>
+        </ion-item> -->
+        <ion-item  *ngIf="a  && a.status == 3">
+        <ion-label>Calificación</ion-label>
+        <star-rating *ngIf="a"
+        [value]="a.qualification"
+        totalstars="5"
+        checkedcolor="yellow"
+        uncheckedcolor="black"
+        size="24px" 
+        [readonly]="a.qualification == 0 ? false : true" 
+        (rate)="onRate($event)"></star-rating>
+        <ion-icon *ngIf="a && a.qualification != 0" color="success" name="checkmark-circle-outline"></ion-icon>
+      </ion-item>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+ </div>
+
 </ion-content>

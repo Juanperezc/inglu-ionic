@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <app-nav-header title="Recordatorios"> </app-nav-header>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-auth-verify *ngIf="!user"></app-auth-verify>
+  <div *ngIf="user">
+    <ion-fab
+      *ngIf="user && user.type == 'patient'"
+      (click)="addReminders()"
+      vertical="bottom"
+      horizontal="end"
+      slot="fixed"
+    >
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-list *ngIf="reminders && reminders.length > 0">
+      <ion-item *ngFor="let reminder of reminders">
+        <!--    <ion-thumbnail  slot="start">
+          <img [src]="reminder.doctor_photo">
+        </ion-thumbnail> -->
+        <ion-label>
+          {{reminder.title}}
+        </ion-label>
+        <ion-buttons slot="end">
+          <ion-button (click)="goToReminder(reminder.id)" float-right item-end>
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button
+            (click)="deleteReminder(reminder.id)"
+            float-right
+            item-end
+          >
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <!--
+       <h3><b>Medico:</b> {{ reminder.doctor }}</h3>
+          <p><b>Fecha:</b>{{reminder.date}}</p>
+          <p><b>Estado:</b>{{getStatusItem(reminder.status)}}</p> 
+        -->
+      </ion-item>
+    </ion-list>
+    <app-no-data
+      *ngIf="reminders && reminders.length == 0"
+      text="No posees ninguna información sobre recordatorios"
+    ></app-no-data>
+  </div>
+</ion-content>

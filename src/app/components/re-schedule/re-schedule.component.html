@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismissModal()" icon-only
+        ><ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Reprogramar cita</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <!-- <ion-list-header><b>Reportar problema</b></ion-list-header> -->
+  <form *ngIf="appointmentForm" [formGroup]="appointmentForm" (ngSubmit)="onReSchedule(appointmentForm)">
+    <div padding>
+      <ion-item>
+        <ion-label>Ubicacion</ion-label>
+        <ion-select
+          class="myCustomSelect"
+          formControlName="user_workspace_id"
+          placeholder=""
+        >
+          <ion-select-option
+            *ngFor="let u of user_workspaces"
+            [value]="u.id"
+            >{{u.location}} - {{getDayStr(u.day)}} / {{u.start_time}} -
+            {{u.end_time}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fecha de la cita</ion-label>
+        <ion-datetime
+          [min]="minDate"
+          formControlName="date"
+          [monthNames]="monthNames"
+          [monthShortNames]="monthShortNames"
+          displayFormat="D MMM YYYY H:mm"
+          cancelText ="Cancelar"
+          doneText="Ok"
+        ></ion-datetime>
+      </ion-item>
+    </div>
+    <br/>
+    <div padding>
+      <ion-button
+      size="medium"
+      type="submit"
+      [disabled]="!appointmentForm.valid"
+      expand="block"
+      >Guardar</ion-button>
+    </div>
+  </form>
+</ion-content>

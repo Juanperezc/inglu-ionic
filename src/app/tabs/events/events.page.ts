@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { NavController, ModalController, AlertController } from "@ionic/angular";
 import { EventService } from "src/app/services/EventService.service";
 import { FilterEventsComponent } from 'src/app/components/filter-events/filter-events.component';
+import { GlobalService } from 'src/app/services/global.service';
+import { UserStorage } from 'src/app/services/storage/UserStorage.service';
 
 @Component({
   selector: "app-events",
@@ -11,17 +13,20 @@ import { FilterEventsComponent } from 'src/app/components/filter-events/filter-e
 export class EventsPage {
   segmentModel = "events";
   public type = null;
-  public events = [];
-  public my_events = [];
-
+  public events: any;
+  public my_events: any;
+  public user: any;
+  
   constructor(
     private eventService: EventService,
     private navController: NavController,
     private modalController: ModalController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private globalService : GlobalService
   ) {}
 
   async ionViewDidEnter() {
+    this.user = await UserStorage.getUser();
     await this.loadEvents();
     await this.loadMyEvents();
     // this.notificationService.getImgFromType()
@@ -106,10 +111,13 @@ export class EventsPage {
  */
 
   segmentChanged(ev: any) {
-    console.log("Segment changed", ev);
+   /*  console.log("Segment changed", ev); */
   }
 
   goToEvent(id) {
     this.navController.navigateForward(`/app/event-detail/${id}`);
+  }
+  getMomentDate(time) {
+    return this.globalService.momentDate(time);
   }
 }

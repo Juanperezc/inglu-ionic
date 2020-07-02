@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{  id ? 'Editar' : 'Crear'}} Recordatorio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div >
+    <ion-card>
+    
+      <ion-card-content>
+        <form
+        *ngIf = "reminderForm"
+          [formGroup]="reminderForm"
+          (ngSubmit)="onSave(reminderForm)"
+        >
+          <ion-item>
+            <ion-label>Titulo</ion-label>
+            <ion-input type="text" formControlName="title" ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Descripción</ion-label>
+            <ion-textarea formControlName="description" ></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label>Fecha del Recordatorio</ion-label>
+            <ion-datetime
+             
+              formControlName="date"
+              [monthNames]="monthNames"
+              [monthShortNames]="monthShortNames"
+              displayFormat="D MMM YYYY H:mm"
+              cancelText ="Cancelar"
+              doneText="Ok"
+            ></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-button
+              size="medium"
+              type="submit"
+              [disabled]="!reminderForm.valid"
+              expand="block"
+              >Guardar</ion-button
+            >
+          </ion-item>
+        </form>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

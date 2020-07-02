@@ -9,17 +9,26 @@ const routes: Routes = [
   },
   {
     path: 'app',
-    canActivate: [AuthGuardService],
+   /*  canActivate: [AuthGuardService], */
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
+/* 
   {
+    path: 'reminder-detail',
+    loadChildren: () => import('./reminder-detail/reminder-detail.module').then( m => m.ReminderDetailPageModule)
+  }, */
+ /*  {
     path: 'event-detail',
     loadChildren: () => import('./pages/event-detail/event-detail.module').then( m => m.EventDetailPageModule)
-  },
+  }, */
+/*   {
+    path: 'create-appointment',
+    loadChildren: () => import('./pages/create-appointment/create-appointment.module').then( m => m.CreateAppointmentPageModule)
+  }, */
 
  /*  {
     path: 'notifications',

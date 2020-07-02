@@ -2,22 +2,29 @@
   <app-nav-header title="Citas"><!-- <b>s</b> --></app-nav-header>
 </ion-header>
 
+
 <ion-content [fullscreen]="true">
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  <ion-list >
-    <ion-item (click)="goToAppointment(appointment.id)"*ngFor="let appointment of appointments">
-      <ion-thumbnail  slot="start">
-        <img [src]="appointment.photo">
-      </ion-thumbnail>
-      <ion-label> 
-         <h3><b>Medico:</b> {{ appointment.doctor }}</h3>
-        <p><b>Fecha:</b>{{appointment.date}}</p>
-        <p><b>Estado:</b>{{getStatusItem(appointment.status)}}</p>
-     </ion-label>
-    </ion-item>
-  </ion-list>
+  <app-auth-verify *ngIf="!user"></app-auth-verify>
+  <div  *ngIf="user">
+    <ion-fab *ngIf="user && user.type == 'patient'" (click)="addAppointment()" vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-list *ngIf="appointments && appointments.length > 0" >
+      <ion-item  (click)="goToAppointment(appointment.id)"*ngFor="let appointment of appointments">
+        <ion-thumbnail  slot="start">
+          <img [src]="appointment.doctor_photo">
+        </ion-thumbnail>
+        <ion-label> 
+           <h3><b>Medico:</b> {{ appointment.doctor }}</h3>
+          <p><b>Fecha:</b>{{appointment.date}}</p>
+          <p><b>Estado:</b>{{getStatusItem(appointment.status)}}</p>
+       </ion-label>
+      </ion-item>
+     
+    </ion-list>
+    <app-no-data *ngIf="appointments && appointments.length == 0"></app-no-data>
+  </div>
+ 
 </ion-content>

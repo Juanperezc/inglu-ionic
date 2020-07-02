@@ -6,6 +6,8 @@ import { StarRatingComponent } from "ng-starrating";
 import { AlertController, ModalController } from "@ionic/angular";
 import { ReportComponent } from "src/app/components/report/report.component";
 import { SuggestionComponent } from "src/app/components/suggestion/suggestion.component";
+import { EventUserService } from 'src/app/services/EventUserService.service';
+import { UserStorage } from 'src/app/services/storage/UserStorage.service';
 
 @Component({
   selector: "app-event-detail",
@@ -18,6 +20,7 @@ export class EventDetailPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private eventService: EventService,
+    private eventUserService: EventUserService,
     private globalService: GlobalService,
     private alertController: AlertController,
     private modalController: ModalController
@@ -79,7 +82,7 @@ export class EventDetailPage implements OnInit {
     await modal.present();
   }
 
-  async presentRate() {
+  async presentRate(qualitication) {
     const alert = await this.alertController.create({
       cssClass: "my-custom-class",
       header: "Comentario (Opcional)",
@@ -103,7 +106,12 @@ export class EventDetailPage implements OnInit {
         {
           text: "Enviar",
           handler: (e) => {
-            console.log("Confirm Ok", e);
+            console.log("Confirm Ok", e,qualitication);
+            let commentary = null;
+            if (e.paragraph != ""){
+              commentary = e.paragraph;
+            }
+            this.saveQualification(qualitication,commentary)
           },
         },
       ],
@@ -112,6 +120,51 @@ export class EventDetailPage implements OnInit {
     await alert.present();
   }
 
+  async saveQualification(q,comment = null){
+    try {
+      await this.globalService.presentLoading();
+      const user = await UserStorage.getUser();
+      const data = {
+        event_id: parseInt(this.id,10),
+        user_id: user.id,
+        qualification:q,
+        comment: comment
+      }
+      const eventResponse: any = await this.eventUserService.update(this.e.event_user_id,data);
+    /*   this.e = eventResponse.data; */
+      console.log("this.event", eventResponse);
+      await this.globalService.closeLoading();
+      await this.loadEvent(this.id);
+    } catch (error) {
+      console.error("error", error);
+      await this.globalService.closeLoading();
+    }
+  }
+  
+   getStatus(status){
+    switch(status){
+      case 1:
+        return "Activo"
+      case 2:
+        return "Cancelado"
+      case 3:
+        return "Culminado"
+    }
+  }
+
+  async unSubscribe(){
+    try {
+      
+      await this.globalService.presentLoading();
+      const eventResponse: any = await this.eventUserService.delete(this.e.event_user_id);
+      console.log("this.event", eventResponse);
+      await this.globalService.closeLoading();
+      await this.loadEvent(this.id);
+    } catch (error) {
+      console.error("error", error);
+      await this.globalService.closeLoading();
+    }
+  }
   async onRate($event: {
     oldValue: number;
     newValue: number;
@@ -121,6 +174,6 @@ export class EventDetailPage implements OnInit {
       New Value: ${$event.newValue}, 
       Checked Color: ${$event.starRating.checkedcolor}, 
       Unchecked Color: ${$event.starRating.uncheckedcolor}`);
-    this.presentRate();
+    this.presentRate($event.newValue);
   }
 }

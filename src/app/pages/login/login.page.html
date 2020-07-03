@@ -21,26 +21,26 @@
         <br/>
         <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
         <div padding>
-        
+
           <ion-item>
             <ion-input type="text" formControlName="email" placeholder="Correo"></ion-input>
           </ion-item>
           <ion-item>
             <ion-input type="password" formControlName="password" placeholder="Contraseña"></ion-input>
           </ion-item>
-      
+
         </div>
         <br/>
-       
+
         <div padding>
-          <ion-button size="medium" type="submit" [disabled]="!loginForm.valid" expand="block">Ingresar</ion-button>
+          <ion-button size="medium" type="submit" [disabled]="!loginForm.valid" expand="block">Iniciar Sesión</ion-button>
         </div>
       </form>
         <br/>
         <div class="ion-text-center" padding>
-         <ion-button fill="outline" (click)="forgotPassword()"> Olvido su  contraseña?</ion-button> 
-         
-      
+         <ion-button fill="outline" (click)="forgotPassword()"> Olvido su  contraseña?</ion-button>
+
+
         </div>
       </ion-col>
     </ion-row>

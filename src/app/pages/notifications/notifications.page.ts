@@ -23,20 +23,15 @@ export class NotificationsPage implements OnInit {
   }
 
   async readNotifications(){
-  
       try {
-      
     /*    await this.globalService.presentLoading(); */
        const userResponse: any = await this.notificationService.read_notifications();
        await UserStorage.setUser(userResponse.data);
       /*  await this.globalService.closeLoading();
        await this.globalService.saveToast(); */
       } catch (error) {
-        
      /*    await this.globalService.closeLoading(); */
       }
-  
-
   }
 
   goToSection(type: any){

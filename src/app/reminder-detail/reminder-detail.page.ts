@@ -86,7 +86,8 @@ export class ReminderDetailPage implements OnInit {
       await this.globalService.closeLoading();
         await this.globalService.saveToast("El recordatorio se creo con exito");
         this.globalService.incUpdateAppointment(true);
-        this.navController.navigateRoot("/app/reminder-detail/" + reminderData.id)
+        this.navController.back();
+   /*      this.navController.navigateRoot("/app/reminder-detail/" + reminderData.id) */
       /*  GlobalService.CloseSweet(); */
     } catch (error) {
       await this.globalService.closeLoading();

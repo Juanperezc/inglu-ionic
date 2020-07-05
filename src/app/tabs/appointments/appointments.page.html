@@ -14,10 +14,12 @@
     <ion-list *ngIf="appointments && appointments.length > 0" >
       <ion-item  (click)="goToAppointment(appointment.id)"*ngFor="let appointment of appointments">
         <ion-thumbnail  slot="start">
-          <img [src]="appointment.doctor_photo">
+          <img *ngIf="user && user.type == 'patient'" [src]="appointment.doctor_photo">
+          <img *ngIf="user && user.type == 'doctor'" [src]="appointment.photo">
         </ion-thumbnail>
         <ion-label> 
-           <h3><b>Medico:</b> {{ appointment.doctor }}</h3>
+          <h3 *ngIf="user && user.type == 'patient'"><b>Medico:</b> {{ appointment.doctor }}</h3>
+          <h3 *ngIf="user && user.type == 'doctor'"><b>Paciente:</b> {{ appointment.patient }}</h3>
           <p><b>Fecha:</b>{{appointment.date}}</p>
           <p><b>Estado:</b>{{getStatusItem(appointment.status)}}</p>
        </ion-label>

@@ -44,7 +44,7 @@
       </ion-item>
       <ion-item>
         <ion-label  position="stacked">Descripcion</ion-label>
-        <ion-textarea [value]="e.description" disabled="true"></ion-textarea>
+        <ion-textarea [autoGrow]="true"  axRows="5"[value]="e.description" disabled="true"></ion-textarea>
       </ion-item>
       <ion-item *ngIf="e.status != 3 && e.status != 2" >
         <ion-label >Opciones</ion-label>

@@ -13,27 +13,24 @@ import { ReminderService } from 'src/app/services/ReminderService.service';
 export class RemindersPage implements OnInit {
   public reminders: Array<any>;
   public user: any;
-
+  public updateAppointment:any;
   constructor(
     private globalService: GlobalService,
     private reminderService: ReminderService,
     private navController: NavController,
     private alertController: AlertController) {
-      
     }
 
     async addReminders() {
-
       this.navController.navigateForward(`/app/create-reminder`);
     }
-  
+
     async ionViewDidEnter() {
       this.user = await UserStorage.getUser();
-    
       await this.loadReminders();
       // this.notificationService.getImgFromType()
     }
-  
+
     async loadReminders() {
       try {
         /*    await this.globalService.presentLoading(); */
@@ -49,7 +46,9 @@ export class RemindersPage implements OnInit {
     }
     
     ionViewDidLeave() {
- 
+      if (this.updateAppointment) {
+        this.updateAppointment.unsubscribe();
+      }
     }
   
     getStatusItem(status) {
@@ -61,7 +60,7 @@ export class RemindersPage implements OnInit {
         const alert = await this.alertController.create({
           cssClass: 'my-custom-class',
           header: 'Advertencia',
-          message: '¿Esta seguro que desea cancelar su cita? No se podran revertir los cambios.',
+          message: '¿Esta seguro que desea borrar su recordatorio? No se podran revertir los cambios.',
           buttons: [
             {
               text: 'Volver',
@@ -84,9 +83,7 @@ export class RemindersPage implements OnInit {
             }
           ]
         });
-    
         await alert.present();
-      
       } catch (error) {
         console.error("error", error);
         await this.globalService.closeLoading();
@@ -98,7 +95,14 @@ export class RemindersPage implements OnInit {
     }
 
     async ngOnInit() {
-     
+      this.updateAppointment = this.globalService.updateAppointment.subscribe(
+        async (res) => {
+          if (res != false) {
+            await this.loadReminders();
+          }
+        }
+      );
     }
 
+   
 }

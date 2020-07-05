@@ -25,3 +25,19 @@ section:not(.full-width),
   color: black  !important;
   opacity: 1 !important;
 }
+.native-textarea{
+  height: 100% !important;
+}
+.textarea-wrapper.sc-ion-textarea-md {
+  height: 100% !important;
+}
+
+ion-textarea{
+  height: 190px !important;
+  div{
+    height: 100% !important;
+    textarea{
+      height: 100% !important;
+    }
+  }
+}

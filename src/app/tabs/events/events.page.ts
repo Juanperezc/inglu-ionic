@@ -36,7 +36,7 @@ export class EventsPage {
     if (this.type != null){
       const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
-        header: 'Confirmacion',
+        header: 'Confirmación',
         message: '¿Deseas dejar de aplicar el filtro?',
         buttons: [
           {

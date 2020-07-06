@@ -17,7 +17,8 @@ import { ReScheduleComponent } from 'src/app/components/re-schedule/re-schedule.
 export class AppointmentDetailPage implements OnInit {
 
   id: any;
-  public a= null;
+  public a = null;
+  public user = null;
   constructor(
     private route: ActivatedRoute,
     private appointmentService: AppointmentService,
@@ -28,6 +29,7 @@ export class AppointmentDetailPage implements OnInit {
   ) {}
 
   async ngOnInit() {
+    this.user = await UserStorage.getUser();
     this.route.params.subscribe(async (params) => {
       this.id = params["id"];
       console.log("this.id", this.id);

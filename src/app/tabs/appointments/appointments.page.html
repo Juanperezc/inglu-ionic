@@ -2,31 +2,47 @@
   <app-nav-header title="Citas"><!-- <b>s</b> --></app-nav-header>
 </ion-header>
 
-
 <ion-content [fullscreen]="true">
   <app-auth-verify *ngIf="!user"></app-auth-verify>
-  <div  *ngIf="user">
-    <ion-fab *ngIf="user && user.type == 'patient'" (click)="addAppointment()" vertical="bottom" horizontal="end" slot="fixed">
+  <div *ngIf="user">
+    <ion-fab
+      *ngIf="user && user.type == 'patient'"
+      (click)="addAppointment()"
+      vertical="bottom"
+      horizontal="end"
+      slot="fixed"
+    >
       <ion-fab-button>
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-    <ion-list *ngIf="appointments && appointments.length > 0" >
-      <ion-item  (click)="goToAppointment(appointment.id)"*ngFor="let appointment of appointments">
-        <ion-thumbnail  slot="start">
-          <img *ngIf="user && user.type == 'patient'" [src]="appointment.doctor_photo">
-          <img *ngIf="user && user.type == 'doctor'" [src]="appointment.photo">
+    <ion-list *ngIf="appointments && appointments.length > 0">
+      <ion-item
+        (click)="goToAppointment(appointment.id)"
+        *ngFor="let appointment of appointments"
+      >
+        <ion-thumbnail slot="start">
+          <img
+            *ngIf="user && user.type == 'patient'"
+            [src]="(appointment.doctor_photo) ? appointment.doctor_photo : '/assets/avatar.jpeg'"
+          />
+          <img
+            *ngIf="user && user.type == 'doctor'"
+            [src]="(appointment.photo) ? appointment.photo : '/assets/avatar.jpeg'"
+          />
         </ion-thumbnail>
-        <ion-label> 
-          <h3 *ngIf="user && user.type == 'patient'"><b>Medico:</b> {{ appointment.doctor }}</h3>
-          <h3 *ngIf="user && user.type == 'doctor'"><b>Paciente:</b> {{ appointment.patient }}</h3>
+        <ion-label>
+          <h3 *ngIf="user && user.type == 'patient'">
+            <b>Medico:</b> {{ appointment.doctor }}
+          </h3>
+          <h3 *ngIf="user && user.type == 'doctor'">
+            <b>Paciente:</b> {{ appointment.patient }}
+          </h3>
           <p><b>Fecha:</b>{{appointment.date}}</p>
           <p><b>Estado:</b>{{getStatusItem(appointment.status)}}</p>
-       </ion-label>
+        </ion-label>
       </ion-item>
-     
     </ion-list>
     <app-no-data *ngIf="appointments && appointments.length == 0"></app-no-data>
   </div>
- 
 </ion-content>

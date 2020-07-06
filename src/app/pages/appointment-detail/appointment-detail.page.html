@@ -1,39 +1,11 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Cita</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <section>
-  <ion-card  *ngIf="appointment">
-    <ion-card-content>
-      <img [src]="appointment.photo">
-      <h3><b>Medico:</b> {{ appointment.doctor }}</h3>
-      <p><b>Fecha:</b>{{appointment.date}}</p>
-    </ion-card-content>
-  </ion-card>
-</section>
-  <section>
-    <header>Opciones</header>
-    <ion-button color="warning">Reprogramar</ion-button>
-    <ion-button color="danger">Cancelar</ion-button>
-   
-  </section>
-</ion-content>
- -->
-
- <ion-header>
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
     </ion-buttons>
  
     <ion-title>Cita</ion-title>
-    <ion-buttons  slot="end">
+    <ion-buttons  *ngIf="user && user.type == 'patient'" slot="end">
       <ion-button (click)="suggestion()">
         <ion-icon name="bulb-outline"></ion-icon>
       </ion-button>
@@ -45,19 +17,15 @@
 </ion-header>
 
 <ion-content>
- <!--  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> -->
  <div *ngIf="a">
   <ion-card >
-    <img class="" [src]="a.doctor_photo" />
+    <img *ngIf="user && user.type == 'patient'" class="" [src]="(a.doctor_photo) ? a.doctor_photo : '/assets/avatar.jpeg'" />
+    <img *ngIf="user && user.type == 'doctor'" class="" [src]="(a.photo) ? a.photo : '/assets/avatar.jpeg'" />
+    
     <ion-card-header>
-      <ion-card-title>Cita medica con {{a.doctor}}</ion-card-title>
+      <ion-card-title>Cita medica con {{ (user && user.type == 'patient') ? a.doctor : a.patient }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-    
       <ion-item>
         <ion-label>Fecha</ion-label>
         <ion-label>{{a.date}}</ion-label>
@@ -70,10 +38,6 @@
         <ion-label>Estado</ion-label>
         <ion-label>{{getStatus(a.status)}}</ion-label>
       </ion-item>
-      <!-- <ion-item>
-        <ion-label  position="stacked">Descripcion</ion-label>
-        <ion-textarea [value]="a.description" disabled="true"></ion-textarea>
-      </ion-item> -->
       <ion-item *ngIf="a.status != 3 && a.status != 2" >
         <!-- <ion-label >Opciones</ion-label> -->
         <ion-button  (click)="cancelAppointment()" color="danger" slot="end">
@@ -83,7 +47,7 @@
           Reprogramar
         </ion-button>
       </ion-item>
-      <div class="star-rating">
+      <div *ngIf="user && user.type == 'patient'"  class="star-rating">
  <!--        <ion-item>
           <ion-label position="stacked">Comentario sobre el evento</ion-label>
           <ion-textarea mode="md"></ion-textarea>

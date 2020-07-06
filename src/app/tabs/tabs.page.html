@@ -18,11 +18,9 @@
     </ion-tab-button>
     <ion-tab-button tab="profile">
       <ion-icon name="person-circle-sharp"></ion-icon>
-
-
     </ion-tab-button>
 
-    <ion-tab-button tab="reminders">
+    <ion-tab-button *ngIf="(user && user.type) == 'patient'" tab="reminders">
       <ion-icon name="create-sharp"></ion-icon>
     </ion-tab-button>
   </ion-tab-bar>

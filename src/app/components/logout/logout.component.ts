@@ -24,7 +24,8 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
 
       async logout() {
         if (this.platform.is('cordova')) {
-          this.oneSignal.logoutEmail();
+          this.oneSignal.logoutEmail().then((res) => console.log(res))
+          .catch((err) => console.error('error', err));
         }
         await UserStorage.clear();
         this.dismissClick();

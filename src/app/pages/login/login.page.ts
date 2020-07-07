@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserStorage } from 'src/app/services/storage/UserStorage.service';
@@ -7,6 +7,7 @@ import { UserService } from 'src/app/services/UserService.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { environment } from 'src/environments/environment';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -21,6 +22,8 @@ export class LoginPage implements OnInit {
     private spinner: NgxSpinnerService,
     private globalService: GlobalService,
     private userService: UserService,
+    private oneSignal: OneSignal,
+    private platform: Platform,
     private iab: InAppBrowser) { 
       this.loginForm = this.formBuilder.group({
         email: ['', Validators.required],
@@ -45,6 +48,9 @@ export class LoginPage implements OnInit {
         console.log(loginData);
         await UserStorage.setUser(loginData.data.user)
         await UserStorage.setToken(loginData.data.token);
+         if (this.platform.is('cordova')) {
+        this.oneSignal.setEmail(loginData.data.user.email);
+         }
         this.spinner.show();
         setTimeout(() => {
           /** spinner ends after 5 seconds */

@@ -31,8 +31,9 @@
             </ion-select>
           </ion-item>
           <ion-item>
-            <ion-label>Ubicacion</ion-label>
+            <ion-label>Ubicación</ion-label>
             <ion-select
+              (ionChange)="onChangeLocation($event)"
               class="myCustomSelect"
               formControlName="user_workspace_id"
               placeholder=""
@@ -45,18 +46,66 @@
               </ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-item>
-            <ion-label>Fecha de la cita</ion-label>
-            <ion-datetime
-              [min]="minDate"
-              formControlName="date"
-              [monthNames]="monthNames"
-              [monthShortNames]="monthShortNames"
-              displayFormat="D MMM YYYY H:mm"
-              cancelText="Cancelar"
-              doneText="Ok"
-            ></ion-datetime>
-          </ion-item>
+          <div *ngIf="appointmentForm.value.user_workspace_id">
+            <ng-template
+              #currentTimeMarkerTemplate
+              let-columnDate="columnDate"
+              let-dayStartHour="dayStartHour"
+              let-dayStartMinute="dayStartMinute"
+              let-dayEndHour="dayEndHour"
+              let-dayEndMinute="dayEndMinute"
+              let-isVisible="isVisible"
+              let-topPx="topPx"
+            >
+              <div
+                class="cal-current-time-marker"
+                *ngIf="isVisible && showMarker"
+                [style.top.px]="topPx"
+              ></div>
+            </ng-template>
+            <div class="row text-center">
+              <div class="col-md-4">
+                <div class="btn-group">
+                  <ion-button
+                    class="btn btn-primary"
+                    mwlCalendarPreviousView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                  >
+                    Atrás
+                  </ion-button>
+                  <ion-button
+                    class="btn btn-primary"
+                    mwlCalendarNextView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                  >
+                    Siguiente
+                  </ion-button>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <h3 class="title-date">
+                  {{ viewDate | calendarDate:(view +
+                  'ViewTitle'):locale:weekStartsOn }}
+                </h3>
+              </div>
+            </div>
+            <mwl-calendar-week-view
+              [excludeDays]="excludeDays"
+              (beforeViewRender)="beforeWeekViewRender($event)"
+              [locale]="locale"
+              [events]="events"
+              [weekStartsOn]="weekStartsOn"
+              (hourSegmentClicked)="hourSegmentClicked($event)"
+              [viewDate]="viewDate"
+              [currentTimeMarkerTemplate]="currentTimeMarkerTemplate"
+              [dayStartHour]="dayStartHour"
+              [dayEndHour]="dayEndHour"
+            >
+            </mwl-calendar-week-view>
+          </div>
+
           <ion-item>
             <ion-button
               size="medium"

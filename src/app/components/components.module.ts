@@ -16,10 +16,13 @@ import { SelectSpecialtyComponent } from './select-specialty/select-specialty.co
 import { SpecialtyService } from '../services/SpecialtyService.service';
 import { LogoutComponent } from './logout/logout.component'
 import { AuthVerifyComponent } from './auth-verify/auth-verify.component';
+import { CalendarModule } from 'angular-calendar';
+
 @NgModule({
   imports: [
     IonicModule,
     FormsModule,
+    CalendarModule,
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
@@ -30,8 +33,10 @@ import { AuthVerifyComponent } from './auth-verify/auth-verify.component';
     ClaimUserService,
     SuggestionService,
     SuggestionUserService,
-    SpecialtyService
+    SpecialtyService,
+ 
   ],
+
   declarations: [ReScheduleComponent,LogoutComponent, ReportComponent,SelectSpecialtyComponent,AuthVerifyComponent, NoDataComponent, NavHeaderComponent,SuggestionComponent, FilterEventsComponent],
   exports: [ReScheduleComponent,LogoutComponent, ReportComponent,SelectSpecialtyComponent,AuthVerifyComponent, NoDataComponent, NavHeaderComponent, FilterEventsComponent],
 })

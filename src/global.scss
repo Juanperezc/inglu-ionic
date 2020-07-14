@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -25,17 +25,25 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-ion-content{
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+ion-content {
   --offset-bottom: 0px !important;
 }
 ion-toolbar {
-    --background: #041F63;
-    --color: white;
-  }
-  ion-tab-button {
-    --color: #041F63;
-    --color-selected: black;
+  --background: #041f63;
+  --color: white;
+}
+ion-tab-button {
+  --color: #041f63;
+  --color-selected: black;
   /*   ion-icon{
         --color: #041F63;  
     } */
-  }
+}
+.cal-disabled {
+  opacity: 0.5;
+}
+.cal-disabled .cal-time-events {
+  opacity: 0.5;
+}

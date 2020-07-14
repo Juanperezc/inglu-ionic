@@ -13,11 +13,15 @@ import { SuggestionComponent } from "src/app/components/suggestion/suggestion.co
 import { ComponentsModule } from 'src/app/components/components.module';
 import { RatingModule } from 'ng-starrating';
 import { ReScheduleComponent } from 'src/app/components/re-schedule/re-schedule.component';
+import { CustomDateFormatter } from 'src/app/components/re-schedule/custom-date-formatter.provider';
+import { CalendarModule } from 'angular-calendar';
+
 
 @NgModule({
   imports: [
     CommonModule,
     RatingModule,
+  
     ComponentsModule,
     FormsModule,
     IonicModule,
@@ -28,6 +32,6 @@ import { ReScheduleComponent } from 'src/app/components/re-schedule/re-schedule.
     SuggestionComponent,
     ReScheduleComponent],
   declarations: [AppointmentDetailPage],
-  providers: [AppointmentService],
+  providers: [AppointmentService,CustomDateFormatter],
 })
 export class AppointmentDetailPageModule {}

@@ -7,15 +7,22 @@ import { IonicModule } from '@ionic/angular';
 import { CreateAppointmentPageRoutingModule } from './create-appointment-routing.module';
 
 import { CreateAppointmentPage } from './create-appointment.page';
+import { CalendarModule } from 'angular-calendar';
+import { CustomDateFormatter } from './custom-date-formatter.provider';
+
 
 @NgModule({
   imports: [
     CommonModule,
+    CalendarModule,
     ReactiveFormsModule,
     FormsModule,
     IonicModule,
     CreateAppointmentPageRoutingModule
   ],
-  declarations: [CreateAppointmentPage]
+  declarations: [CreateAppointmentPage],
+  providers: [
+    CustomDateFormatter
+  ]
 })
 export class CreateAppointmentPageModule {}

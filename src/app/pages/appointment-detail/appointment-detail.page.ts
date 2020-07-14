@@ -9,6 +9,13 @@ import { UserStorage } from 'src/app/services/storage/UserStorage.service';
 import { StarRatingComponent } from 'ng-starrating';
 import { ReScheduleComponent } from 'src/app/components/re-schedule/re-schedule.component';
 
+
+import { registerLocaleData } from "@angular/common";
+import localeEs from "@angular/common/locales/es"; // to register french
+
+registerLocaleData(localeEs);
+
+
 @Component({
   selector: 'app-appointment-detail',
   templateUrl: './appointment-detail.page.html',

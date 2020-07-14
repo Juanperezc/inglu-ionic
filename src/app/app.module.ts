@@ -15,11 +15,19 @@ import { GlobalService } from './services/global.service';
 import { AuthGuardService } from './services/utils/auth-guard.service';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 
+
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+ 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
     BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(),

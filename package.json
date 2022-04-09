@@ -33,7 +33,7 @@
     "cordova-plugin-telerik-imagepicker": "^2.3.3",
     "core-js": "^2.5.4",
     "date-fns": "^2.14.0",
-    "moment": "^2.26.0",
+    "moment": "^2.29.2",
     "ng-starrating": "^1.0.20",
     "ngx-spinner": "^8.1.0",
     "onesignal-cordova-plugin": "^2.9.1",
